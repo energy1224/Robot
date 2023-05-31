@@ -1,9 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
@@ -15,10 +13,10 @@ public class Main {
         int x = 0;
         int y = 0;
 
-        char direction = 'N';
-        ArrayList<Coord> log = new ArrayList<>();
+         char direction = 'N';
+         Set<Coord> log = new HashSet<>();
+//        ArrayList<Coord> log = new ArrayList<>();
         log.add(new Coord(x, y));
-        //System.out.println(log);
 
         for (int i = 0; i < action.length; i++) {
             if (action[i] == 'L') {
@@ -47,12 +45,22 @@ public class Main {
                 else  log.add(position);
             }
         }
+        int result;
+        if (log.size()< action.length){
+            result = log.size();
+
+        }else
+            result =-1;
         PrintWriter wr =new PrintWriter(new File("output.txt"));
-        wr.println(log.size());
+        wr.println(result);
         wr.close();
+        System.out.println(log.size());
+        System.out.println(action.length);
 
 
     }
+
+
 
     public static char turnLeft ( char direction){
             switch (direction) {
@@ -117,8 +125,10 @@ class Coord {
     public int hashCode() {
         return Objects.hash(x, y);
     }
+}
 
-    }
+
+
 
 
 
