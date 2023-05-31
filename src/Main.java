@@ -12,11 +12,20 @@ public class Main {
         char[] action = act.toCharArray();
         int x = 0;
         int y = 0;
+        char primer='S';
+        int repeat= 0;
+        for(int m =0; m<action.length; m++){
+            if (primer == (action[m])){
+                repeat++;
+            }
+        }
+//         System.out.println(repeat);
 
          char direction = 'N';
          Set<Coord> log = new HashSet<>();
 //        ArrayList<Coord> log = new ArrayList<>();
         log.add(new Coord(x, y));
+        //System.out.println(log);
 
         for (int i = 0; i < action.length; i++) {
             if (action[i] == 'L') {
@@ -37,30 +46,26 @@ public class Main {
                 if (direction == 'W')
                     x--;
                 Coord position = new Coord(x, y);
-                //System.out.println(position);
                 if (log.contains(position)) {
-                   // System.out.println("мы тут были");
                     break;
                 }
                 else  log.add(position);
             }
+
         }
         int result;
-        if (log.size()< action.length){
+        if (log.size()<=repeat){
             result = log.size();
-
         }else
             result =-1;
         PrintWriter wr =new PrintWriter(new File("output.txt"));
         wr.println(result);
         wr.close();
-        System.out.println(log.size());
-        System.out.println(action.length);
+//       System.out.println("В массиве " + log.size() + " элементов");
+//        System.out.println(action.length);
 
 
     }
-
-
 
     public static char turnLeft ( char direction){
             switch (direction) {
@@ -125,10 +130,8 @@ class Coord {
     public int hashCode() {
         return Objects.hash(x, y);
     }
-}
 
-
-
+    }
 
 
 
